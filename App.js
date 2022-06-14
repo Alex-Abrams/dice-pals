@@ -1,12 +1,4 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
-
-import React from 'react';
+import React, { Component } from 'react';
 import type {Node} from 'react';
 import {
   SafeAreaView,
@@ -17,40 +9,31 @@ import {
   useColorScheme,
   View,
 } from 'react-native';
+import {Provider} from 'react-redux';
+import thunk from 'redux-thunk';
+import {applyMiddleware, combineReducers, createStore, compose} from 'redux';
+import logger from 'redux-logger';
+import rootReducer from './frontend/reducers/root_reducer';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+let store = null;
 
-const Section = ({children, title}): Node => {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
+function configureStore(initialState = {}) {
+  if (store) {
+    return store;
+  }
+  const middlewares = [thunk, logger];
+
+  store = createStore(
+    rootReducer,
+    initialState,
+    compose(applyMiddleware(...middlewares))
   );
-};
+  return store;
+}
+
+let app_store = configureStore();
+
+
 
 const App: () => Node = () => {
 
