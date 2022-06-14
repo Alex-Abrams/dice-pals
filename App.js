@@ -15,6 +15,8 @@ import {applyMiddleware, combineReducers, createStore, compose} from 'redux';
 import logger from 'redux-logger';
 import rootReducer from './frontend/reducers/root_reducer';
 
+import FrontPage from './frontend/screens/front_page';
+
 let store = null;
 
 function configureStore(initialState = {}) {
@@ -39,10 +41,7 @@ const App: () => Node = () => {
 
   return (
     <SafeAreaView>
-      <Text>Dice rolling app</Text>
-      <Text>Should click to roll dice</Text>
-      <Text>Animate a Dice Rolling feature</Text>
-      <Text>Like 6 seconds of a dice switching to every number</Text>
+      <FrontPage />
     </SafeAreaView>
   );
 };
