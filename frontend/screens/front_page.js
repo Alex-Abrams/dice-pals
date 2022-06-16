@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { View, Button, Text, StyleSheet } from 'react-native';
+import DiceSix from './dice_six';
+import DiceFive from './dice_five';
 
 class FrontPage extends React.Component {
   constructor(props) {
@@ -14,15 +16,15 @@ class FrontPage extends React.Component {
 
   render() {
     return(
-      <View style={{ backgroundColor: 'purple' }}>
+      <View style={{}}>
         <View style={styles.dice_container}>
+
           <View style={styles.dice_box}>
-            <View style={styles.dice_circle_six}></View>
-            <View style={styles.dice_circle_six}></View>
-            <View style={styles.dice_circle_six}></View>
+            <DiceFive />
           </View>
 
           <View style={styles.dice_box}>
+          <DiceSix />
           </View>
 
         </View>
@@ -43,16 +45,7 @@ const styles = StyleSheet.create({
     height: 110,
     width: 110,
     borderRadius: 8,
-    flexDirection: 'row',
-  },
-  dice_circle_six : {
-    height: 26,
-    width: 26,
-    borderWidth: 4,
-    borderRadius: 40,
-    backgroundColor: 'black',
-    marginLeft: 5,
-    marginTop: 2,
+    paddingTop: 5,
   },
 });
 
