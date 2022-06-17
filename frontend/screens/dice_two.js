@@ -29,7 +29,7 @@ class DiceTwo extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    // flex: 1,
     marginTop: 2,
     marginLeft: 5,
     marginRight: 5,
