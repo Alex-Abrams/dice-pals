@@ -14,6 +14,9 @@ class FrontPage extends React.Component {
 
     this.state = {
       count: 0,
+      dice_roll_1: 0,
+      dice_roll_2: 0,
+      dice_roll_3: 0,
     };
 
   }
@@ -24,12 +27,20 @@ class FrontPage extends React.Component {
     return Math.floor(Math.random() * max); // roll a number between 1-6 randomly
   }
 
+  componentDidMount() {
+    this.setState({ dice_roll_1: this.rollOneThroSix(6)});
+    this.setState({ dice_roll_2: this.rollOneThroSix(6)});
+    this.setState({ dice_roll_3: this.rollOneThroSix(6)});
+  }
+
   runDiceAnimation() {
     // this will use timer intervals to change the dice from 1-6 randomly
     // to simulate rolling the dice
     let counter = 0;
     let oneSecInterval = setInterval(() => {
-      this.setState({count: this.rollOneThroSix(6)});
+      this.setState({ dice_roll_1: this.rollOneThroSix(6)});
+      this.setState({ dice_roll_2: this.rollOneThroSix(6)});
+      this.setState({ dice_roll_3: this.rollOneThroSix(6)});
       counter += 1;
       console.log('el countadaor', counter);
       if (counter === 20) {
@@ -44,7 +55,9 @@ class FrontPage extends React.Component {
 
 
   render() {
-    let dice_number = this.state.count;
+    let dice_number_1 = this.state.dice_roll_1;
+    let dice_number_2 = this.state.dice_roll_2;
+    let dice_number_3 = this.state.dice_roll_3;
     const dice_array = [<DiceOne />, <DiceTwo />, <DiceThree />, <DiceFour />, <DiceFive />, <DiceSix />];
 
     return(
@@ -54,15 +67,15 @@ class FrontPage extends React.Component {
         <View style={styles.dice_container}>
 
             <View style={styles.dice_box}>
-              {dice_array[dice_number]}
+              {dice_array[dice_number_1]}
             </View>
 
             <View style={styles.dice_box}>
-              {dice_array[dice_number]}
+              {dice_array[dice_number_2]}
             </View>
 
             <View style={styles.dice_box}>
-              {dice_array[dice_number]}
+              {dice_array[dice_number_3]}
             </View>
 
 
