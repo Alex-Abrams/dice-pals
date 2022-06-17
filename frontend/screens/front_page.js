@@ -19,42 +19,34 @@ class FrontPage extends React.Component {
   }
 
 
-  // countDown() {
-  //   setTimeout(() => {this.setState({count: this.state.count + 1})}, 2000);
-  // }
+
+  rollOneThroSix(max) {
+    return Math.floor(Math.random() * max); // roll a number between 1-6 randomly
+  }
 
   runDiceAnimation() {
     // this will use timer intervals to change the dice from 1-6 randomly
     // to simulate rolling the dice
     let counter = 0;
-    let oneSecInterval = setInterval(() => {this.setState({count: this.state.count + 1})}, 1000);
-    // console.log("COUNTER", counter);
-    if (this.state.count === 5) {clearInterval(oneSecInterval)};
-
+    let oneSecInterval = setInterval(() => {
+      this.setState({count: this.rollOneThroSix(6)});
+      counter += 1;
+      console.log('el countadaor', counter);
+      if (counter === 20) {
+        console.log('aowndolanwolnd');
+        clearInterval(oneSecInterval);
+      };
+    }, 100); // set interval timing here
 
   }
 
-  // componentWillUnmount(){
-  //   if (this.state.count === 5) {clearInterval(this.runDiceAnimation())}
-  // }
 
-  renderDice() {
-    let display_dice = (this.state.count > 0) ? (
-      <DiceSix />
-    ) : (
-      <DiceThree />
-    );
-
-    return(
-      <View style={styles.dice_box}>
-        {display_dice}
-      </View>
-    );
-  };
 
 
   render() {
-    console.log('STATE', this.state);
+    let dice_number = this.state.count;
+    const dice_array = [<DiceOne />, <DiceTwo />, <DiceThree />, <DiceFour />, <DiceFive />, <DiceSix />];
+
     return(
       <View style={{backgroundColor: 'yellow', height: '100%' }}>
         <View>
@@ -62,18 +54,17 @@ class FrontPage extends React.Component {
         <View style={styles.dice_container}>
 
             <View style={styles.dice_box}>
-              <DiceOne />
+              {dice_array[dice_number]}
             </View>
 
             <View style={styles.dice_box}>
-              <DiceTwo />
+              {dice_array[dice_number]}
             </View>
 
             <View style={styles.dice_box}>
-              <DiceTwo />
+              {dice_array[dice_number]}
             </View>
 
-            {this.renderDice()}
 
         </View>
 
