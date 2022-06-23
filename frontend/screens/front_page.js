@@ -56,13 +56,16 @@ class FrontPage extends React.Component {
     }, 100); // set interval timing here
   }
 
-  displayDie(die, dice_number_array) {
+  displayDie(die, dice_number_array, total_dice) {
 
+    // let chosen_array_size = die.slice(0, total_dice);
+    // console.log('chosen_array_size', chosen_array_size);
+    console.log(total_dice);
 
     return(
-      <View>
+      <View style={styles.dice_container}>
         {die.map((dice, i) =>
-          <View style={styles.dice_box}>
+          <View style={styles.dice_box} key={i}>
             {die[dice_number_array[i]].dice}
           </View>
         )}
@@ -74,15 +77,12 @@ class FrontPage extends React.Component {
   addOrSubTractDice(plus_or_minus) {
     if (plus_or_minus === "minus" && this.state.total_dice > 1) {
       this.setState({ total_dice: this.state.total_dice - 1});
-    } else {
-      console.log('cant have 0 dice!');
-    };
-
-    if (plus_or_minus === "plus" && this.state.total_dice < 6) {
+    } else if (plus_or_minus === "plus" && this.state.total_dice < 6) {
       this.setState({ total_dice: this.state.total_dice + 1});
     } else {
-      console.log('cant have more than 6 dice!')
-    };
+      console.log('Out of dice range');
+    }
+
   }
 
 
@@ -91,9 +91,21 @@ class FrontPage extends React.Component {
     let dice_number_1 = this.state.dice_roll_1;
     let dice_number_2 = this.state.dice_roll_2;
     let dice_number_3 = this.state.dice_roll_3;
+    let dice_number_4 = this.state.dice_roll_4;
+    let dice_number_5 = this.state.dice_roll_5;
+    let dice_number_6 = this.state.dice_roll_6;
+    const dice_number_array = [dice_number_1, dice_number_2, dice_number_3, dice_number_4, dice_number_5, dice_number_6];
     // const dice_array = [<DiceOne />, <DiceTwo />, <DiceThree />, <DiceFour />, <DiceFive />, <DiceSix />];
     // console.log('state?', [dice_number_1, dice_number_2, dice_number_3]);
-    console.log('total_dice', this.state.total_dice);
+    // console.log('total_dice', this.state.total_dice);
+
+    // <View style={styles.dice_box}>
+    //   {dice_hash[dice_number_1].dice}
+    // </View>
+    //
+    // <View style={styles.dice_box}>
+    //   {dice_hash[dice_number_2].dice}
+    // </View>
 
     const dice_hash = [{'dice': <DiceOne />, 'num': 1 }, {'dice': <DiceTwo />, 'num': 2 }, {'dice':  <DiceThree />, 'num': 3 }, {'dice': <DiceFour />, 'num': 4 },
       {'dice': <DiceFive />, 'num': 5 }, {'dice': <DiceSix />, 'num': 6 }];
@@ -102,15 +114,9 @@ class FrontPage extends React.Component {
       <View style={{backgroundColor: 'yellow', height: '100%' }}>
         <View>
 
-        <View style={styles.dice_container}>
 
-            <View style={styles.dice_box}>
-              {dice_hash[dice_number_1].dice}
-            </View>
-
-            <View style={styles.dice_box}>
-              {dice_hash[dice_number_2].dice}
-            </View>
+        <View>
+          {this.displayDie(dice_hash, dice_number_array, this.state.total_dice)}
         </View>
 
         <View>
