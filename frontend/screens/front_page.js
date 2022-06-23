@@ -20,7 +20,7 @@ class FrontPage extends React.Component {
       dice_roll_4: 0,
       dice_roll_5: 0,
       dice_roll_6: 0,
-      total_dice: 0,
+      total_dice: 2, // always start at 2 dice, lowest will be 1
     };
 
   }
@@ -56,14 +56,14 @@ class FrontPage extends React.Component {
     }, 100); // set interval timing here
   }
 
-  displayDie(die, dice_number) {
+  displayDie(die, dice_number_array) {
 
-    
+
     return(
       <View>
         {die.map((dice, i) =>
           <View style={styles.dice_box}>
-            {die[dice_number_1].dice}
+            {die[dice_number_array[i]].dice}
           </View>
         )}
       </View>
@@ -71,13 +71,29 @@ class FrontPage extends React.Component {
   }
 
 
+  addOrSubTractDice(plus_or_minus) {
+    if (plus_or_minus === "minus" && this.state.total_dice > 1) {
+      this.setState({ total_dice: this.state.total_dice - 1});
+    } else {
+      console.log('cant have 0 dice!');
+    };
+
+    if (plus_or_minus === "plus" && this.state.total_dice < 6) {
+      this.setState({ total_dice: this.state.total_dice + 1});
+    } else {
+      console.log('cant have more than 6 dice!')
+    };
+  }
+
 
 
   render() {
     let dice_number_1 = this.state.dice_roll_1;
     let dice_number_2 = this.state.dice_roll_2;
     let dice_number_3 = this.state.dice_roll_3;
-    const dice_array = [<DiceOne />, <DiceTwo />, <DiceThree />, <DiceFour />, <DiceFive />, <DiceSix />];
+    // const dice_array = [<DiceOne />, <DiceTwo />, <DiceThree />, <DiceFour />, <DiceFive />, <DiceSix />];
+    // console.log('state?', [dice_number_1, dice_number_2, dice_number_3]);
+    console.log('total_dice', this.state.total_dice);
 
     const dice_hash = [{'dice': <DiceOne />, 'num': 1 }, {'dice': <DiceTwo />, 'num': 2 }, {'dice':  <DiceThree />, 'num': 3 }, {'dice': <DiceFour />, 'num': 4 },
       {'dice': <DiceFive />, 'num': 5 }, {'dice': <DiceSix />, 'num': 6 }];
@@ -105,6 +121,10 @@ class FrontPage extends React.Component {
         </View>
 
         <View style={styles.buttons_container}>
+
+        <View style={{alignSelf: 'center', paddingBottom: 19}}>
+        <Text style={{ fontWeight: 'bold', fontSize: 19}}>Total: { dice_hash[dice_number_1].num + dice_hash[dice_number_2].num }</Text>
+        </View>
           <View style={styles.button_view}>
           <Button
           title="Roll!"
@@ -115,14 +135,14 @@ class FrontPage extends React.Component {
           <View style={styles.button_view}>
           <Button
           title="Add Dice"
-          onPress={() => this.runDiceAnimation()}
+          onPress={() => this.addOrSubTractDice('plus')}
           buttonStyle={{color: 'red'}}></Button>
           </View>
 
           <View style={styles.button_view}>
           <Button
           title="Remove Dice"
-          onPress={() => this.runDiceAnimation()}
+          onPress={() => this.addOrSubTractDice('minus')}
           buttonStyle={{color: 'red'}}></Button>
           </View>
         </View>
@@ -158,8 +178,6 @@ const styles = StyleSheet.create({
     paddingRight: 10,
   },
   button_view: {
-    // position: 'absolute',
-    // bottom: 40,
     paddingBottom: 10,
     width: '100%',
     paddingLeft: 10,
