@@ -51,8 +51,8 @@ const styles = StyleSheet.create({
     width: 26,
     borderWidth: 4,
     borderRadius: 40,
-    borderColor: 'purple',
-    backgroundColor: 'purple',
+    borderColor: '#ffffff',
+    backgroundColor: '#ffffff',
     marginTop: 2,
   }
 });

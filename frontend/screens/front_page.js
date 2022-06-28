@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Button, Text, StyleSheet } from 'react-native';
+import { View, Button, Text, StyleSheet, ImageBackground } from 'react-native';
 import DiceSix from './dice_six';
 import DiceFive from './dice_five';
 import DiceFour from './dice_four';
@@ -30,7 +30,7 @@ class FrontPage extends React.Component {
     return Math.floor(Math.random() * max); // roll a number between 1-6 randomly
   }
 
-  componentDidMount() {
+  componentDidMount() { // have the dice randomly rolled when the screen is loaded.
     this.setState({ dice_roll_1: this.rollOneThroSix(6)});
     this.setState({ dice_roll_2: this.rollOneThroSix(6)});
     this.setState({ dice_roll_3: this.rollOneThroSix(6)});
@@ -104,20 +104,13 @@ class FrontPage extends React.Component {
     let dice_number_6 = this.state.dice_roll_6;
     const dice_number_array = [dice_number_1, dice_number_2, dice_number_3, dice_number_4, dice_number_5, dice_number_6];
 
-    // <View style={styles.dice_box}>
-    //   {dice_hash[dice_number_1].dice}
-    // </View>
-    //
-    // <View style={styles.dice_box}>
-    //   {dice_hash[dice_number_2].dice}
-    // </View>
-
     const dice_hash = [{'dice': <DiceOne />, 'num': 1 }, {'dice': <DiceTwo />, 'num': 2 }, {'dice':  <DiceThree />, 'num': 3 }, {'dice': <DiceFour />, 'num': 4 },
       {'dice': <DiceFive />, 'num': 5 }, {'dice': <DiceSix />, 'num': 6 }];
 
 
     return(
-      <View style={{backgroundColor: 'yellow', height: '100%' }}>
+      <View style={{backgroundColor: '#f2f2f2', height: '100%' }}>
+      <ImageBackground source={require('../images/playingmat.jpg')} style={{ width: '100%', height: '100%' }}>
         <View>
 
 
@@ -131,7 +124,7 @@ class FrontPage extends React.Component {
         <View style={styles.buttons_container}>
 
         <View style={{alignSelf: 'center', paddingBottom: 19}}>
-        <Text style={{ fontWeight: 'bold', fontSize: 19}}>Total: { this.sumOfDice(dice_number_array, this.state.total_dice)}</Text>
+        <Text style={styles.total_text}>Total: { this.sumOfDice(dice_number_array, this.state.total_dice)}</Text>
         </View>
           <View style={styles.button_view}>
           <Button
@@ -142,19 +135,19 @@ class FrontPage extends React.Component {
 
           <View style={styles.button_view}>
           <Button
-          title="Add Dice"
+          title=" (+) Add Dice"
           onPress={() => this.addOrSubTractDice('plus')}
           buttonStyle={{color: 'red'}}></Button>
           </View>
 
           <View style={styles.button_view}>
           <Button
-          title="Remove Dice"
+          title="(-) Remove Dice"
           onPress={() => this.addOrSubTractDice('minus')}
           buttonStyle={{color: 'red'}}></Button>
           </View>
         </View>
-
+      </ImageBackground>
       </View>
     );
   }
@@ -171,7 +164,7 @@ const styles = StyleSheet.create({
     // paddingTop: 100,
   },
   dice_box: {
-    backgroundColor: 'purple',
+    backgroundColor: '#ffffff',
     borderWidth: 5,
     height: 110,
     width: 110,
@@ -191,6 +184,15 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     paddingRight: 10,
   },
+  total_text: {
+    textShadowColor: 'rgba(0, 0, 0, 0.75)',
+    textShadowOffset: {width: -1, height: 1},
+    textShadowRadius: 10,
+    fontSize: 40,
+
+
+    color: 'white',
+  }
 });
 
 
