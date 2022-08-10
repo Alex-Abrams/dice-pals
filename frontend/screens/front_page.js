@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Button, Text, StyleSheet, ImageBackground } from 'react-native';
+import { View, Button, Text, StyleSheet, ImageBackground, Image } from 'react-native';
 import DiceSix from './dice_six';
 import DiceFive from './dice_five';
 import DiceFour from './dice_four';
@@ -69,6 +69,7 @@ class FrontPage extends React.Component {
             {die[dice_number_array[i]].dice}
           </View>
         )}
+        <Image source={require('../images/cropped_20_sided.png')} style={{ height: 120, width: 120}} />
       </View>
     );
 
@@ -128,15 +129,14 @@ class FrontPage extends React.Component {
     return(
       <View style={{backgroundColor: '#f2f2f2', height: '100%' }}>
       <ImageBackground source={require('../images/playingmat.jpg')} style={{ width: '100%', height: '100%' }}>
-        <View>
 
 
         <View>
           {this.displayDie(dice_hash, dice_number_array, this.state.total_dice)}
+
         </View>
 
 
-        </View>
 
         <View style={styles.buttons_container}>
 
