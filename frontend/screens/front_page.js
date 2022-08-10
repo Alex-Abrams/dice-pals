@@ -6,6 +6,7 @@ import DiceFour from './dice_four';
 import DiceThree from './dice_three';
 import DiceTwo from './dice_two';
 import DiceOne from './dice_one';
+import TwentySided from '../dice_displays/20_sided/20_sided';
 
 
 class FrontPage extends React.Component {
@@ -69,7 +70,7 @@ class FrontPage extends React.Component {
             {die[dice_number_array[i]].dice}
           </View>
         )}
-        <Image source={require('../images/cropped_20_sided.png')} style={{ height: 120, width: 120}} />
+        <TwentySided />
       </View>
     );
 
