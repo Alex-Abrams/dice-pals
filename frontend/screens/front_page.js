@@ -21,6 +21,7 @@ class FrontPage extends React.Component {
       dice_roll_5: 0,
       dice_roll_6: 0,
       total_dice: 2, // always start at 2 dice, lowest will be 1
+      show_total: false,
     };
 
   }
@@ -39,6 +40,7 @@ class FrontPage extends React.Component {
   runDiceAnimation() {
     // this will use timer intervals to change the dice from 1-6 randomly
     // to simulate rolling the dice
+    this.setState({show_total: false}); // dont show total while rolling die
     let counter = 0;
     let oneSecInterval = setInterval(() => {
       this.setState({ dice_roll_1: this.rollOneThroSix(6)});
@@ -51,6 +53,7 @@ class FrontPage extends React.Component {
       counter += 1;
       if (counter === 20) {
         clearInterval(oneSecInterval);
+        this.setState({show_total: true}); // once counter hits 20 show the total
       };
     }, 100); // set interval timing here
   }
@@ -94,6 +97,20 @@ class FrontPage extends React.Component {
     return sum;
   }
 
+  showTotal(dice_number_array) {
+    const display_total = (this.state.show_total) ? (
+      <Text style={styles.total_text}>Total: {this.sumOfDice(dice_number_array, this.state.total_dice)}</Text>
+      ) : (
+        null
+    );
+
+    return(
+      <View>
+        {display_total}
+      </View>
+    );
+  }
+
 
   render() {
     let dice_number_1 = this.state.dice_roll_1;
@@ -124,7 +141,7 @@ class FrontPage extends React.Component {
         <View style={styles.buttons_container}>
 
         <View style={{alignSelf: 'center', paddingBottom: 19}}>
-        <Text style={styles.total_text}>Total: { this.sumOfDice(dice_number_array, this.state.total_dice)}</Text>
+        {this.showTotal(dice_number_array)}
         </View>
           <View style={styles.button_view}>
           <Button
