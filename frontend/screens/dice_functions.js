@@ -31,8 +31,13 @@ export function display20Die(dice20_array, total_dice) {
   );
 }
 
-const styles = StyleSheet.create({
+export function sumDice(dice_array, total_dice) {
+  const chosen_dice = dice_array.slice(0, total_dice);
+  let result = chosen_dice.reduce((partialSum, a) => partialSum + a, 0); // total of dice
+  return result + (total_dice); // add the missing 1's from the total dice
+}
 
+const styles = StyleSheet.create({
   dice_container: {
     flex: 1,
     flexDirection: 'row',

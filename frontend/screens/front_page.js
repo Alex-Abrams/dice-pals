@@ -8,7 +8,7 @@ import DiceTwo from './dice_two';
 import DiceOne from './dice_one';
 import TwentySided from '../dice_displays/20_sided/20_sided';
 
-import { displaySixDie, display20Die }from './dice_functions';
+import { displaySixDie, display20Die, sumDice }from './dice_functions';
 
 class FrontPage extends React.Component {
   constructor(props) {
@@ -16,12 +16,12 @@ class FrontPage extends React.Component {
 
     this.state = {
       // count: 0,
-      dice_roll_1: 0,
-      dice_roll_2: 0,
-      dice_roll_3: 0,
-      dice_roll_4: 0,
-      dice_roll_5: 0,
-      dice_roll_6: 0,
+      dice_roll_1: 1,
+      dice_roll_2: 1,
+      dice_roll_3: 1,
+      dice_roll_4: 1,
+      dice_roll_5: 1,
+      dice_roll_6: 1,
       dice_roll_20: 1,
       dice_roll_21: 5,
       dice_roll_22: 16,
@@ -37,6 +37,7 @@ class FrontPage extends React.Component {
 
   rollDice(max) {
     return Math.floor(Math.random() * max); // roll a number between 1-6 randomly
+
   }
 
   componentDidMount() { // have the dice randomly rolled when the screen is loaded.
@@ -96,7 +97,7 @@ class FrontPage extends React.Component {
 
   showTotal(dice_number_array) {
     const display_total = (this.state.show_total) ? (
-      <Text style={styles.total_text}>Total: {this.sumOfDice(dice_number_array, this.state.total_dice)}</Text>
+      <Text style={styles.total_text}>Total: {sumDice(dice_number_array, this.state.total_dice)}</Text>
       ) : (
         null
     );
@@ -122,14 +123,15 @@ class FrontPage extends React.Component {
       {'dice': <DiceFive />, 'num': 5 }, {'dice': <DiceSix />, 'num': 6 }];
 
     const dice20_array = [this.state.dice_roll_20, this.state.dice_roll_21, this.state.dice_roll_22 ,this.state.dice_roll_23, this.state.dice_roll_24, this.state.dice_roll_25];
-// {displaySixDie(dice_hash, dice_number_array, this.state.total_dice)}
+    // {display20Die(dice20_array, this.state.total_dice)}
+    console.log('dice', dice_number_array);
     return(
       <View style={{backgroundColor: '#f2f2f2', height: '100%' }}>
       <ImageBackground source={require('../images/playingmat.jpg')} style={{ width: '100%', height: '100%' }}>
 
 
         <View style={{flex: 1, flexDirection: 'row', flexWrap: 'wrap'}}>
-          {display20Die(dice20_array, this.state.total_dice)}
+          {displaySixDie(dice_hash, dice_number_array, this.state.total_dice)}
 
         </View>
 
