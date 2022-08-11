@@ -21,6 +21,12 @@ class FrontPage extends React.Component {
       dice_roll_4: 0,
       dice_roll_5: 0,
       dice_roll_6: 0,
+      dice_roll_20: 0,
+      dice_roll_21: 0,
+      dice_roll_22: 0,
+      dice_roll_23: 0,
+      dice_roll_24: 0,
+      dice_roll_25: 0,
       total_dice: 2, // always start at 2 dice, lowest will be 1
       show_total: false,
     };
@@ -28,14 +34,14 @@ class FrontPage extends React.Component {
   }
 
 
-  rollOneThroSix(max) {
+  rollDice(max) {
     return Math.floor(Math.random() * max); // roll a number between 1-6 randomly
   }
 
   componentDidMount() { // have the dice randomly rolled when the screen is loaded.
-    this.setState({ dice_roll_1: this.rollOneThroSix(6)});
-    this.setState({ dice_roll_2: this.rollOneThroSix(6)});
-    this.setState({ dice_roll_3: this.rollOneThroSix(6)});
+    this.setState({ dice_roll_1: this.rollDice(6)});
+    this.setState({ dice_roll_2: this.rollDice(6)});
+    this.setState({ dice_roll_3: this.rollDice(6)});
   }
 
   runDiceAnimation() {
@@ -44,13 +50,18 @@ class FrontPage extends React.Component {
     this.setState({show_total: false}); // dont show total while rolling die
     let counter = 0;
     let oneSecInterval = setInterval(() => {
-      this.setState({ dice_roll_1: this.rollOneThroSix(6)});
-      this.setState({ dice_roll_2: this.rollOneThroSix(6)});
-      this.setState({ dice_roll_3: this.rollOneThroSix(6)});
-      this.setState({ dice_roll_4: this.rollOneThroSix(6)});
-      this.setState({ dice_roll_5: this.rollOneThroSix(6)});
-      this.setState({ dice_roll_6: this.rollOneThroSix(6)});
-
+      this.setState({ dice_roll_1: this.rollDice(6)});
+      this.setState({ dice_roll_2: this.rollDice(6)});
+      this.setState({ dice_roll_3: this.rollDice(6)});
+      this.setState({ dice_roll_4: this.rollDice(6)});
+      this.setState({ dice_roll_5: this.rollDice(6)});
+      this.setState({ dice_roll_6: this.rollDice(6)});
+      this.setState({ dice_roll_20: this.rollDice(20)});
+      this.setState({ dice_roll_21: this.rollDice(20)});
+      this.setState({ dice_roll_22: this.rollDice(20)});
+      this.setState({ dice_roll_23: this.rollDice(20)});
+      this.setState({ dice_roll_24: this.rollDice(20)});
+      this.setState({ dice_roll_25: this.rollDice(20)});
       counter += 1;
       if (counter === 20) {
         clearInterval(oneSecInterval);
@@ -70,7 +81,13 @@ class FrontPage extends React.Component {
             {die[dice_number_array[i]].dice}
           </View>
         )}
-        <TwentySided />
+
+        <TwentySided roll={this.state.dice_roll_20} />
+
+        <TwentySided roll={this.state.dice_roll_20} />
+
+
+
       </View>
     );
 
