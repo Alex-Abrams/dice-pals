@@ -8,25 +8,26 @@ import DiceTwo from './dice_two';
 import DiceOne from './dice_one';
 import TwentySided from '../dice_displays/20_sided/20_sided';
 
+import { displaySixDie, display20Die }from './dice_functions';
 
 class FrontPage extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      count: 0,
+      // count: 0,
       dice_roll_1: 0,
       dice_roll_2: 0,
       dice_roll_3: 0,
       dice_roll_4: 0,
       dice_roll_5: 0,
       dice_roll_6: 0,
-      dice_roll_20: 0,
-      dice_roll_21: 0,
-      dice_roll_22: 0,
-      dice_roll_23: 0,
-      dice_roll_24: 0,
-      dice_roll_25: 0,
+      dice_roll_20: 1,
+      dice_roll_21: 5,
+      dice_roll_22: 16,
+      dice_roll_23: 7,
+      dice_roll_24: 12,
+      dice_roll_25: 19,
       total_dice: 2, // always start at 2 dice, lowest will be 1
       show_total: false,
     };
@@ -68,29 +69,6 @@ class FrontPage extends React.Component {
         this.setState({show_total: true}); // once counter hits 20 show the total
       };
     }, 100); // set interval timing here
-  }
-
-  displayDie(die, dice_number_array, total_dice) {
-    // so die ie dice_hash needs to be full available
-    const the_dice = dice_number_array.slice(0, total_dice);
-    // this will map out the total amount of dice depending how mmuch the user has hit the 'add dice button'
-    return(
-      <View style={styles.dice_container}>
-        {the_dice.map((dice, i) =>
-          <View style={styles.dice_box} key={i}>
-            {die[dice_number_array[i]].dice}
-          </View>
-        )}
-
-        <TwentySided roll={this.state.dice_roll_20} />
-
-        <TwentySided roll={this.state.dice_roll_20} />
-
-
-
-      </View>
-    );
-
   }
 
 
@@ -143,19 +121,20 @@ class FrontPage extends React.Component {
     const dice_hash = [{'dice': <DiceOne />, 'num': 1 }, {'dice': <DiceTwo />, 'num': 2 }, {'dice':  <DiceThree />, 'num': 3 }, {'dice': <DiceFour />, 'num': 4 },
       {'dice': <DiceFive />, 'num': 5 }, {'dice': <DiceSix />, 'num': 6 }];
 
-
+    const dice20_array = [this.state.dice_roll_20, this.state.dice_roll_21, this.state.dice_roll_22 ,this.state.dice_roll_23, this.state.dice_roll_24, this.state.dice_roll_25];
+// {displaySixDie(dice_hash, dice_number_array, this.state.total_dice)}
     return(
       <View style={{backgroundColor: '#f2f2f2', height: '100%' }}>
       <ImageBackground source={require('../images/playingmat.jpg')} style={{ width: '100%', height: '100%' }}>
 
 
-        <View>
-          {this.displayDie(dice_hash, dice_number_array, this.state.total_dice)}
+        <View style={{flex: 1, flexDirection: 'row', flexWrap: 'wrap'}}>
+          {display20Die(dice20_array, this.state.total_dice)}
 
         </View>
 
 
-
+        {/* BUTTONS BELOW*/}
         <View style={styles.buttons_container}>
 
         <View style={{alignSelf: 'center', paddingBottom: 19}}>
@@ -224,8 +203,6 @@ const styles = StyleSheet.create({
     textShadowOffset: {width: -1, height: 1},
     textShadowRadius: 10,
     fontSize: 40,
-
-
     color: 'white',
   }
 });
