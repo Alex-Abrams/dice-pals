@@ -30,6 +30,7 @@ class FrontPage extends React.Component {
       dice_roll_25: 19,
       total_dice: 2, // always start at 2 dice, lowest will be 1
       show_total: false,
+      dice_type: true, // change around later for didferent dice types, also see 'sumDice'
     };
 
   }
@@ -58,12 +59,12 @@ class FrontPage extends React.Component {
       this.setState({ dice_roll_4: this.rollDice(6)});
       this.setState({ dice_roll_5: this.rollDice(6)});
       this.setState({ dice_roll_6: this.rollDice(6)});
-      this.setState({ dice_roll_20: this.rollDice(20)});
-      this.setState({ dice_roll_21: this.rollDice(20)});
-      this.setState({ dice_roll_22: this.rollDice(20)});
-      this.setState({ dice_roll_23: this.rollDice(20)});
-      this.setState({ dice_roll_24: this.rollDice(20)});
-      this.setState({ dice_roll_25: this.rollDice(20)});
+      this.setState({ dice_roll_20: this.rollDice(20) + 1 });
+      this.setState({ dice_roll_21: this.rollDice(20) + 1 });
+      this.setState({ dice_roll_22: this.rollDice(20) + 1 });
+      this.setState({ dice_roll_23: this.rollDice(20) + 1 });
+      this.setState({ dice_roll_24: this.rollDice(20) + 1 });
+      this.setState({ dice_roll_25: this.rollDice(20) + 1 });
       counter += 1;
       if (counter === 20) {
         clearInterval(oneSecInterval);
@@ -84,20 +85,9 @@ class FrontPage extends React.Component {
 
   }
 
-  sumOfDice(dice_array, total_dice) {
-    const chosen_dice = dice_array.slice(0, total_dice); // slice the dice array to only sum up total amount of dice on the screen
-
-    let sum = 0;
-    chosen_dice.forEach(dice => {
-      sum += dice + 1; // the dice numbers are in array sequence, so 1 would be 0, adding 1 to each dice roll solves this
-    });
-
-    return sum;
-  }
-
   showTotal(dice_number_array) {
     const display_total = (this.state.show_total) ? (
-      <Text style={styles.total_text}>Total: {sumDice(dice_number_array, this.state.total_dice)}</Text>
+      <Text style={styles.total_text}>Total: {sumDice(dice_number_array, this.state.total_dice, this.state.dice_type)}</Text>
       ) : (
         null
     );
@@ -107,6 +97,10 @@ class FrontPage extends React.Component {
         {display_total}
       </View>
     );
+  }
+
+  changeDiceType() {
+    this.setState({dice_type: !this.state.dice_type});
   }
 
 
@@ -123,15 +117,16 @@ class FrontPage extends React.Component {
       {'dice': <DiceFive />, 'num': 5 }, {'dice': <DiceSix />, 'num': 6 }];
 
     const dice20_array = [this.state.dice_roll_20, this.state.dice_roll_21, this.state.dice_roll_22 ,this.state.dice_roll_23, this.state.dice_roll_24, this.state.dice_roll_25];
-    // {display20Die(dice20_array, this.state.total_dice)}
-    console.log('dice', dice_number_array);
+    // {display20Die(dice20_array, this.state.total_dice)};
+    const display_dice_type = (this.state.dice_type) ? (displaySixDie(dice_hash, dice_number_array, this.state.total_dice)) : (display20Die(dice20_array, this.state.total_dice));
+    const display_dice_total = (this.state.dice_type) ? (this.showTotal(dice_number_array)) : (this.showTotal(dice20_array));
     return(
       <View style={{backgroundColor: '#f2f2f2', height: '100%' }}>
       <ImageBackground source={require('../images/playingmat.jpg')} style={{ width: '100%', height: '100%' }}>
 
 
         <View style={{flex: 1, flexDirection: 'row', flexWrap: 'wrap'}}>
-          {displaySixDie(dice_hash, dice_number_array, this.state.total_dice)}
+          {display_dice_type}
 
         </View>
 
@@ -140,28 +135,38 @@ class FrontPage extends React.Component {
         <View style={styles.buttons_container}>
 
         <View style={{alignSelf: 'center', paddingBottom: 19}}>
-        {this.showTotal(dice_number_array)}
+        {display_dice_total}
         </View>
-          <View style={styles.button_view}>
+        <View style={styles.button_view}>
           <Button
-          title="Roll!"
-          onPress={() => this.runDiceAnimation()}
-          buttonStyle={{color: 'red'}}></Button>
+            title="Roll!"
+            onPress={() => this.runDiceAnimation()}
+            buttonStyle={{color: 'red'}}></Button>
+        </View>
+
+          <View style={{flex: 1, flexDirection: 'row', flexWrap: 'wrap'}}>
+            <View style={styles.button_small}>
+              <Button
+                title=" (+) Add Dice"
+                onPress={() => this.addOrSubTractDice('plus')}
+                buttonStyle={{color: 'red'}}></Button>
+            </View>
+
+            <View style={styles.button_small}>
+              <Button
+                title="(-) Remove Dice"
+                onPress={() => this.addOrSubTractDice('minus')}
+                buttonStyle={{color: 'red'}}></Button>
+            </View>
+
+            <View style={styles.button_small}>
+              <Button
+                title="Change Dice"
+                onPress={() => this.changeDiceType()}
+                buttonStyle={{color: 'red'}}></Button>
+            </View>
           </View>
 
-          <View style={styles.button_view}>
-          <Button
-          title=" (+) Add Dice"
-          onPress={() => this.addOrSubTractDice('plus')}
-          buttonStyle={{color: 'red'}}></Button>
-          </View>
-
-          <View style={styles.button_view}>
-          <Button
-          title="(-) Remove Dice"
-          onPress={() => this.addOrSubTractDice('minus')}
-          buttonStyle={{color: 'red'}}></Button>
-          </View>
         </View>
       </ImageBackground>
       </View>
@@ -197,6 +202,12 @@ const styles = StyleSheet.create({
   button_view: {
     paddingBottom: 10,
     width: '100%',
+    paddingLeft: 10,
+    paddingRight: 10,
+  },
+  button_small: {
+    paddingBottom: 10,
+    width: '50%',
     paddingLeft: 10,
     paddingRight: 10,
   },

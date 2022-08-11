@@ -31,10 +31,15 @@ export function display20Die(dice20_array, total_dice) {
   );
 }
 
-export function sumDice(dice_array, total_dice) {
+export function sumDice(dice_array, total_dice, dice_type) {
   const chosen_dice = dice_array.slice(0, total_dice);
+  console.log('!!', dice_array);
   let result = chosen_dice.reduce((partialSum, a) => partialSum + a, 0); // total of dice
-  return result + (total_dice); // add the missing 1's from the total dice
+  if (dice_type) {
+    return result + (total_dice); // the Math.random will not let me at the 1s to the dice anywhere else
+  } else {
+    return result;
+  };
 }
 
 const styles = StyleSheet.create({
