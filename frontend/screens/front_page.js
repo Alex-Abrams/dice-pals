@@ -6,7 +6,7 @@ import DiceFour from './dice_four';
 import DiceThree from './dice_three';
 import DiceTwo from './dice_two';
 import DiceOne from './dice_one';
-import TwentySided from '../dice_displays/20_sided/20_sided';
+// import TwentySided from '../dice_displays/20_sided';
 
 import { displaySixDie, display20Die, sumDice }from './dice_functions';
 

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import TwentySided from '../dice_displays/20_sided/20_sided';
+import TwentySided from '../dice_displays/20_sided';
+import FourSided from '../dice_displays/four_sided';
 
 export function displaySixDie(die, dice_number_array, total_dice) {
   const the_dice = dice_number_array.slice(0, total_dice);

@@ -1,16 +1,12 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
 
-class TwentySided extends React.Component {
+class FourSided extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      dice_roll_20: 1,
-    };
+
   }
-
-
 
 
   render() {
@@ -18,7 +14,7 @@ class TwentySided extends React.Component {
 
     return(
       <View style={{ alignItems: 'center'}}>
-        <Image source={require('../../images/cropped_20_sided.png')} style={{ height: 120, width: 120}} />
+        <Image source={require('../images/4_sided_die.png')} style={{ height: 120, width: 120}} />
         <Text style={styles.single_number}>{roll}</Text>
       </View>
     );
@@ -37,4 +33,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default TwentySided;
+export default FourSided;
