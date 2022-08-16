@@ -32,9 +32,22 @@ export function display20Die(dice20_array, total_dice) {
   );
 }
 
+export function display4Die(dice4_array, total_dice) {
+  const the_dice = dice20_array.slice(0, total_dice);
+
+  return(
+    <View style={styles.dice_container}>
+      {the_dice.map((dice, i) =>
+        <View key={i}>
+          <FourSided roll={dice4_array[i]} />
+        </View>
+      )}
+    </View>
+  );
+}
+
 export function sumDice(dice_array, total_dice, dice_type) {
   const chosen_dice = dice_array.slice(0, total_dice);
-  console.log('!!', dice_array);
   let result = chosen_dice.reduce((partialSum, a) => partialSum + a, 0); // total of dice
   if (dice_type) {
     return result + (total_dice); // the Math.random will not let me at the 1s to the dice anywhere else

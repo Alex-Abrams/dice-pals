@@ -7,6 +7,7 @@ import DiceThree from './dice_three';
 import DiceTwo from './dice_two';
 import DiceOne from './dice_one';
 // import TwentySided from '../dice_displays/20_sided';
+import FourSided from '../dice_displays/four_sided';
 
 import { displaySixDie, display20Die, sumDice }from './dice_functions';
 
@@ -127,7 +128,7 @@ class FrontPage extends React.Component {
 
         <View style={{flex: 1, flexDirection: 'row', flexWrap: 'wrap'}}>
           {display_dice_type}
-
+          <FourSided />
         </View>
 
 
