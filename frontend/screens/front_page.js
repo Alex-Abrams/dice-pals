@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Button, Text, StyleSheet, ImageBackground, Image, Pressable } from 'react-native';
+import { View, Button, Text, StyleSheet, ImageBackground, Image, Pressable, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import DiceSix from './dice_six';
 import DiceFive from './dice_five';
 import DiceFour from './dice_four';
@@ -122,11 +122,12 @@ class FrontPage extends React.Component {
     // {display20Die(dice20_array, this.state.total_dice)};
     const display_dice_type = (this.state.dice_type) ? (displaySixDie(dice_hash, dice_number_array, this.state.total_dice)) : (display20Die(dice20_array, this.state.total_dice));
     const display_dice_total = (this.state.dice_type) ? (this.showTotal(dice_number_array)) : (this.showTotal(dice20_array));
+    const display_modal = (this.props.is_modal_toggled) ? <SelectDiceModalContainer /> : null;
     return(
-      <View style={{backgroundColor: '#f2f2f2', height: '100%' }}>
+      <TouchableWithoutFeedback style={{backgroundColor: '#f2f2f2', height: '100%' }}>
       <ImageBackground source={require('../images/playingmat.jpg')} style={{ width: '100%', height: '100%' }}>
 
-        <SelectDiceModalContainer />
+        {display_modal}
 
         <View style={{flex: 1, flexDirection: 'row', flexWrap: 'wrap'}}>
           {display_dice_type}
@@ -165,14 +166,14 @@ class FrontPage extends React.Component {
             <View style={styles.button_small}>
               <Button
                 title="Change Dice"
-                onPress={() => this.changeDiceType()}
+                onPress={() => this.props.modal_actions.toggleModal()}
                 buttonStyle={{color: 'red'}}></Button>
             </View>
           </View>
 
         </View>
       </ImageBackground>
-      </View>
+    </TouchableWithoutFeedback >
     );
   }
 }

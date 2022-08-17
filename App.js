@@ -16,6 +16,7 @@ import logger from 'redux-logger';
 import rootReducer from './frontend/reducers/root_reducer';
 
 import FrontPage from './frontend/screens/front_page';
+import FrontPageContainer from './frontend/screens/front_page_container';
 
 let store = null;
 
@@ -41,7 +42,7 @@ const App: () => Node = () => {
 
   return (
     <Provider store={app_store}>
-      <FrontPage />
+      <FrontPageContainer />
     </Provider>
   );
 };
