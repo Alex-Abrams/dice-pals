@@ -7,7 +7,7 @@ const diceReducer = (state = {}, action) => {
 
   switch(action.type) {
     case RECEIVE_DICE_SELECTION:
-      return Object.assign({}, state, action.dice_selection);
+      return Object.assign({}, state, {['selection']: action.dice_selection});
     default:
       return state;
   }

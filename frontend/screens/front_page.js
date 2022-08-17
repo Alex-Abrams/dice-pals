@@ -6,8 +6,8 @@ import DiceFour from './dice_four';
 import DiceThree from './dice_three';
 import DiceTwo from './dice_two';
 import DiceOne from './dice_one';
-// import TwentySided from '../dice_displays/20_sided';
 import FourSided from '../dice_displays/four_sided';
+import SelectDiceModalContainer from '../dice_displays/select_dice_modal_container';
 
 import { displaySixDie, display20Die, sumDice }from './dice_functions';
 
@@ -125,6 +125,8 @@ class FrontPage extends React.Component {
     return(
       <View style={{backgroundColor: '#f2f2f2', height: '100%' }}>
       <ImageBackground source={require('../images/playingmat.jpg')} style={{ width: '100%', height: '100%' }}>
+
+        <SelectDiceModalContainer />
 
         <View style={{flex: 1, flexDirection: 'row', flexWrap: 'wrap'}}>
           {display_dice_type}

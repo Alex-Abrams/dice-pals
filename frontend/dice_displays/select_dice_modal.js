@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, FlatList, Keyboard, StatusBar, ScrollView, Modal} from 'react-native';
+import { View, Text, StyleSheet, Modal, Pressable} from 'react-native';
 import React, { Component } from 'react';
 // this will just list whats IN the modal but the actual modal needs to go in frontpage.
 
@@ -18,7 +18,7 @@ class SelectDiceModal extends React.Component {
            shadowRadius: 4,
            elevation: 5
          }}>
-         <Pressable onPress={() => console.log('presdaaaad!')}>
+         <Pressable onPress={() => this.props.modal_actions.receiveDiceSelection('test')}>
            <Text>Thing </Text>
          </Pressable>
          <Pressable onPress={() => console.log('presddddddsed!')}>
