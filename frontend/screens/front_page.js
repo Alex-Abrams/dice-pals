@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Button, Text, StyleSheet, ImageBackground, Image } from 'react-native';
+import { View, Button, Text, StyleSheet, ImageBackground, Image, Pressable } from 'react-native';
 import DiceSix from './dice_six';
 import DiceFive from './dice_five';
 import DiceFour from './dice_four';
@@ -32,6 +32,7 @@ class FrontPage extends React.Component {
       total_dice: 2, // always start at 2 dice, lowest will be 1
       show_total: false,
       dice_type: true, // change around later for didferent dice types, also see 'sumDice'
+      type_of_dice: '6-sided',
     };
 
   }
@@ -124,7 +125,6 @@ class FrontPage extends React.Component {
     return(
       <View style={{backgroundColor: '#f2f2f2', height: '100%' }}>
       <ImageBackground source={require('../images/playingmat.jpg')} style={{ width: '100%', height: '100%' }}>
-
 
         <View style={{flex: 1, flexDirection: 'row', flexWrap: 'wrap'}}>
           {display_dice_type}

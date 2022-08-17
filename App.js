@@ -40,9 +40,9 @@ let app_store = configureStore();
 const App: () => Node = () => {
 
   return (
-    <SafeAreaView>
+    <Provider store={app_store}>
       <FrontPage />
-    </SafeAreaView>
+    </Provider>
   );
 };
 
