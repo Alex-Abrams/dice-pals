@@ -32,7 +32,7 @@ class FrontPage extends React.Component {
       total_dice: 2, // always start at 2 dice, lowest will be 1
       show_total: false,
       dice_type: true, // change around later for didferent dice types, also see 'sumDice'
-      type_of_dice: '6-sided',
+      // type_of_dice: '6-sided',
     };
 
   }
@@ -131,7 +131,9 @@ class FrontPage extends React.Component {
 
         <View style={{flex: 1, flexDirection: 'row', flexWrap: 'wrap'}}>
           {display_dice_type}
-          <FourSided />
+          {/*
+            <FourSided />
+            */}
         </View>
 
 

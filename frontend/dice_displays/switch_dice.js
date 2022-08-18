@@ -13,15 +13,24 @@ import { View, Text, StyleSheet } from 'react-native';
 const dice_hash = [{'dice': <DiceOne />, 'num': 1 }, {'dice': <DiceTwo />, 'num': 2 }, {'dice':  <DiceThree />, 'num': 3 }, {'dice': <DiceFour />, 'num': 4 },
   {'dice': <DiceFive />, 'num': 5 }, {'dice': <DiceSix />, 'num': 6 }];
 
-function switchDiceType(dice_number_array, this.state.total_dice) {
+function switchDiceType(dice_type, dice_number_array, this.state.total_dice) {
   switch(thing) {
-  case ('20-sided'):
-    return 'EL TACO';
-  // case RECEIVE_WORKOUT_LIFTS:
-  case ('4-sided'):
+  case ('dice-6'):
     return 'the usa';
+  // case RECEIVE_WORKOUT_LIFTS:
+  case ('dice-4'):
+    return <FourSided />;
 
-  case ('6-sided'):
+  case ('dice-8'):
+    return;
+
+  case ('dice-10'):
+    return;
+
+  case ('dice-12'):
+    return;
+
+  case ('dice-20'):
     return;
   default:
     return null;
