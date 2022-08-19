@@ -95,7 +95,7 @@ class FrontPage extends React.Component {
 
   }
 
-  showTotal(dice_number_array) {
+  showTotal(dice_number_array) { // SEE HERE FOR TOTAL
     const display_total = (this.state.show_total) ? (
       <Text style={styles.total_text}>Total: {sumDice(dice_number_array, this.state.total_dice, this.state.dice_type)}</Text>
       ) : (
@@ -115,6 +115,7 @@ class FrontPage extends React.Component {
 
 
   render() {
+    console.log(this.props);
     let dice_number_1 = this.state.dice_roll_1;
     let dice_number_2 = this.state.dice_roll_2;
     let dice_number_3 = this.state.dice_roll_3;

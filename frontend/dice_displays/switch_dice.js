@@ -7,7 +7,7 @@ import DiceThree from '../screens/dice_three';
 import DiceTwo from '../screens/dice_two';
 import DiceOne from '../screens/dice_one';
 import { display20Die, displaySixDie, display4Die } from '../screens/dice_functions';
-import { rollDiceArray } from './roll_functions';
+import { rollDiceArray, sumTotalDice } from './roll_functions';
 
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
@@ -41,26 +41,27 @@ const dice_six_array = [<DiceOne />, <DiceTwo />,  <DiceThree />,  <DiceFour />,
     return null;
 };
 }
-
-export function switchDiceTotal(dice_type) {
+// this will take the store's dice_array, best course for full access
+// so all i should need is sum total dice and added it to the store
+export function switchDiceTotal(dice_type, dice_array, total_dice) {
   switch(dice_type) {
   case ('dice-6'):
-    return;
+    return sumTotalDice(dice_array, total_dice);
 
   case ('dice-4'):
-    return;
+    return sumTotalDice(dice_array, total_dice);
 
   case ('dice-8'):
-    return;
+    return sumTotalDice(dice_array, total_dice);
 
   case ('dice-10'):
-    return;
+    return sumTotalDice(dice_array, total_dice);
 
   case ('dice-12'):
-    return;
+    return sumTotalDice(dice_array, total_dice);
 
   case ('dice-20'):
-    return;
+    return sumTotalDice(dice_array, total_dice);
   default:
     return null;
 };

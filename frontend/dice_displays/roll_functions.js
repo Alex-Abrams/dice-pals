@@ -11,7 +11,12 @@ export function rollDiceArray(max) {
   return dice_array;
 }
 
+export function sumTotalDice(dice_array, total_dice) {
+  const chosen_dice = dice_array.slice(0, total_dice);
+  return chosen_dice.reduce((partialSum, a) => partialSum + a, 0);
+}
 
+// console.log(sumTotalDice([2, 3, 1]), 3);
 // console.log(rollDiceArray(6));
 // console.log(rollDiceArray(20));
 // console.log(rollDiceArray(4));
