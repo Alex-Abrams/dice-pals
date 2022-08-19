@@ -32,7 +32,7 @@ class FrontPage extends React.Component {
       dice_roll_25: 19,
       total_dice: 2, // always start at 2 dice, lowest will be 1
       show_total: false,
-      dice_type: true, // change around later for didferent dice types, also see 'sumDice'
+      dice_type: false, // change around later for didferent dice types, also see 'sumDice'
       // type_of_dice: '6-sided',
     };
 
@@ -123,6 +123,8 @@ class FrontPage extends React.Component {
     const dice20_array = [this.state.dice_roll_20, this.state.dice_roll_21, this.state.dice_roll_22 ,this.state.dice_roll_23, this.state.dice_roll_24, this.state.dice_roll_25];
 
     const display_dice_type = (this.state.dice_type) ? (displaySixDie(dice_hash, dice_number_array, this.state.total_dice)) : (display20Die(dice20_array, this.state.total_dice));
+    // console.log(dice20_array);
+    // console.log(this.state.total_dice);
     const display_dice_total = (this.state.dice_type) ? (this.showTotal(dice_number_array)) : (this.showTotal(dice20_array));
 
     const display_modal = (this.props.is_modal_toggled) ? <SelectDiceModalContainer /> : null;
@@ -135,9 +137,9 @@ class FrontPage extends React.Component {
         {display_modal}
 
         <View style={{flex: 1, flexDirection: 'row', flexWrap: 'wrap'}}>
-          {display_type}
+          {display_dice_type}
           {/*
-            {display_dice_type}
+            {display_type}
             <FourSided />
             */}
         </View>

@@ -20,7 +20,7 @@ export function displaySixDie(die, dice_number_array, total_dice) {
 
 export function display20Die(dice20_array, total_dice) {
   const the_dice = dice20_array.slice(0, total_dice);
-
+  console.log('the dice', the_dice);
   return(
     <View style={styles.dice_container}>
       {the_dice.map((dice, i) =>
