@@ -8,6 +8,7 @@ import DiceTwo from './dice_two';
 import DiceOne from './dice_one';
 import FourSided from '../dice_displays/four_sided';
 import SelectDiceModalContainer from '../dice_displays/select_dice_modal_container';
+import { switchDiceType, switchDiceTotal } from '../dice_displays/switch_dice';
 
 import { displaySixDie, display20Die, sumDice }from './dice_functions';
 
@@ -119,10 +120,13 @@ class FrontPage extends React.Component {
       {'dice': <DiceFive />, 'num': 5 }, {'dice': <DiceSix />, 'num': 6 }];
 
     const dice20_array = [this.state.dice_roll_20, this.state.dice_roll_21, this.state.dice_roll_22 ,this.state.dice_roll_23, this.state.dice_roll_24, this.state.dice_roll_25];
-    // {display20Die(dice20_array, this.state.total_dice)};
+
     const display_dice_type = (this.state.dice_type) ? (displaySixDie(dice_hash, dice_number_array, this.state.total_dice)) : (display20Die(dice20_array, this.state.total_dice));
     const display_dice_total = (this.state.dice_type) ? (this.showTotal(dice_number_array)) : (this.showTotal(dice20_array));
+
     const display_modal = (this.props.is_modal_toggled) ? <SelectDiceModalContainer /> : null;
+
+    const display_type = switchDiceType('dice-6', dice20_array, this.state.total_dice); // dice 6 and dice 20 have diff inputs
     return(
       <TouchableWithoutFeedback style={{backgroundColor: '#f2f2f2', height: '100%' }}>
       <ImageBackground source={require('../images/playingmat.jpg')} style={{ width: '100%', height: '100%' }}>
@@ -130,8 +134,9 @@ class FrontPage extends React.Component {
         {display_modal}
 
         <View style={{flex: 1, flexDirection: 'row', flexWrap: 'wrap'}}>
-          {display_dice_type}
+          {display_type}
           {/*
+            {display_dice_type}
             <FourSided />
             */}
         </View>

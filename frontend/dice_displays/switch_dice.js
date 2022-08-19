@@ -1,11 +1,12 @@
 import TwentySided from '../dice_displays/20_sided';
 import FourSided from '../dice_displays/four_sided';
-import DiceSix from './dice_six';
-import DiceFive from './dice_five';
-import DiceFour from './dice_four';
-import DiceThree from './dice_three';
-import DiceTwo from './dice_two';
-import DiceOne from './dice_one';
+import DiceSix from '../screens/dice_six';
+import DiceFive from '../screens/dice_five';
+import DiceFour from '../screens/dice_four';
+import DiceThree from '../screens/dice_three';
+import DiceTwo from '../screens/dice_two';
+import DiceOne from '../screens/dice_one';
+import { display20Die, displaySixDie, display4Die } from '../screens/dice_functions';
 
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
@@ -13,11 +14,13 @@ import { View, Text, StyleSheet } from 'react-native';
 const dice_hash = [{'dice': <DiceOne />, 'num': 1 }, {'dice': <DiceTwo />, 'num': 2 }, {'dice':  <DiceThree />, 'num': 3 }, {'dice': <DiceFour />, 'num': 4 },
   {'dice': <DiceFive />, 'num': 5 }, {'dice': <DiceSix />, 'num': 6 }];
 
-function switchDiceType(dice_type, dice_number_array, this.state.total_dice) {
-  switch(thing) {
+export function switchDiceType(dice_type, dice_number_array, total_dice) {
+
+  switch(dice_type) {
   case ('dice-6'):
-    return 'the usa';
-  // case RECEIVE_WORKOUT_LIFTS:
+  console.log(dice_number_array);
+    return displaySixDie(dice_hash, dice_number_array, total_dice);
+
   case ('dice-4'):
     return <FourSided />;
 
@@ -31,7 +34,7 @@ function switchDiceType(dice_type, dice_number_array, this.state.total_dice) {
     return;
 
   case ('dice-20'):
-    return;
+    return display20Die(dice_number_array, total_dice);
   default:
     return null;
 };
@@ -40,3 +43,6 @@ function switchDiceType(dice_type, dice_number_array, this.state.total_dice) {
 export function switchDiceTotal() {
 
 }
+
+// displaySixDie(dice_hash, dice_number_array, this.state.total_dice)
+// display20Die(dice20_array, this.state.total_dice
