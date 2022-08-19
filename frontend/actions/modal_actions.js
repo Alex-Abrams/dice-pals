@@ -9,3 +9,10 @@ export const receiveDiceSelection = (dice_selection) => ({
 export const toggleModal = () => ({
   type: TOGGLE_MODAL,
 });
+
+// add the array of rolls to the store
+// so that the switch_dice.js file can accept just 1 variable instead of long booleans
+export const receiveDiceRolls = (rolls) => ({
+  type: RECEIVE_DICE_ROLLS,
+  rolls,
+});

@@ -48,6 +48,7 @@ class FrontPage extends React.Component {
     this.setState({ dice_roll_1: this.rollDice(6)});
     this.setState({ dice_roll_2: this.rollDice(6)});
     this.setState({ dice_roll_3: this.rollDice(6)});
+    // this.props.modalActions.receiveDiceRolls
   }
 
   runDiceAnimation() {
@@ -173,7 +174,7 @@ class FrontPage extends React.Component {
             <View style={styles.button_small}>
               <Button
                 title="Change Dice"
-                onPress={() => this.props.modal_actions.toggleModal()}
+                // onPress={() => this.props.modalActions.toggleModal()}
                 buttonStyle={{color: 'red'}}></Button>
             </View>
           </View>

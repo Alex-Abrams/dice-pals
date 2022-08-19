@@ -18,7 +18,6 @@ export function switchDiceType(dice_type, dice_number_array, total_dice) {
 
   switch(dice_type) {
   case ('dice-6'):
-  console.log(dice_number_array);
     return displaySixDie(dice_hash, dice_number_array, total_dice);
 
   case ('dice-4'):

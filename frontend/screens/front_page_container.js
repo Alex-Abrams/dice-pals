@@ -1,10 +1,10 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import FrontPage from './front_page';
-import * as modal_actions from '../actions/modal_actions';
+import * as modalActions from '../actions/modal_actions';
 
 const mapDispatchToProps = dispatch => ({
-  modal_actions: bindActionCreators(modal_actions, dispatch),
+  modalActions: bindActionCreators(modalActions, dispatch),
 });
 
 const mapStateToProps = state => ({
