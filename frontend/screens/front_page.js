@@ -9,6 +9,8 @@ import DiceOne from './dice_one';
 import FourSided from '../dice_displays/four_sided';
 import SelectDiceModalContainer from '../dice_displays/select_dice_modal_container';
 import { switchDiceType, switchDiceTotal } from '../dice_displays/switch_dice';
+//////
+import {rollDiceArray } from '../dice_displays/roll_functions';
 
 import { displaySixDie, display20Die, sumDice }from './dice_functions';
 
@@ -33,6 +35,8 @@ class FrontPage extends React.Component {
       total_dice: 2, // always start at 2 dice, lowest will be 1
       show_total: false,
       dice_type: false, // change around later for didferent dice types, also see 'sumDice'
+      dice_array6: [3, 2, 2, 6, 4, 1],
+      dice_array20: [8, 11, 19, 4, 7, 16],
       // type_of_dice: '6-sided',
     };
 
@@ -69,12 +73,14 @@ class FrontPage extends React.Component {
       this.setState({ dice_roll_23: this.rollDice(20) + 1 });
       this.setState({ dice_roll_24: this.rollDice(20) + 1 });
       this.setState({ dice_roll_25: this.rollDice(20) + 1 });
+      this.setState({ dice_array6: rollDiceArray(6)});
+      this.setState({ dice_array20: rollDiceArray(20)});
       counter += 1;
-      if (counter === 20) {
+      if (counter === 2) {
         clearInterval(oneSecInterval);
         this.setState({show_total: true}); // once counter hits 20 show the total
       };
-    }, 100); // set interval timing here
+    }, 50); // set interval timing here
   }
 
 
@@ -117,33 +123,33 @@ class FrontPage extends React.Component {
     let dice_number_6 = this.state.dice_roll_6;
     const dice_number_array = [dice_number_1, dice_number_2, dice_number_3, dice_number_4, dice_number_5, dice_number_6];
 
-    const dice_hash = [{'dice': <DiceOne />, 'num': 1 }, {'dice': <DiceTwo />, 'num': 2 }, {'dice':  <DiceThree />, 'num': 3 }, {'dice': <DiceFour />, 'num': 4 },
-      {'dice': <DiceFive />, 'num': 5 }, {'dice': <DiceSix />, 'num': 6 }];
+    // const dice_hash = [{'dice_comp': <DiceOne />, 'num': 1 }, {'dice_comp': <DiceTwo />, 'num': 2 }, {'dice_comp':  <DiceThree />, 'num': 3 }, {'dice_comp': <DiceFour />, 'num': 4 },
+    //   {'poo': <DiceFive />, 'num': 5 }, {'dice_comp': <DiceSix />, 'num': 6 }];
 
-    const dice20_array = [this.state.dice_roll_20, this.state.dice_roll_21, this.state.dice_roll_22 ,this.state.dice_roll_23, this.state.dice_roll_24, this.state.dice_roll_25];
-
-    const display_dice_type = (this.state.dice_type) ? (displaySixDie(dice_hash, dice_number_array, this.state.total_dice)) : (display20Die(dice20_array, this.state.total_dice));
-    // console.log(dice20_array);
+    // const dice20_array = [this.state.dice_roll_20, this.state.dice_roll_21, this.state.dice_roll_22 ,this.state.dice_roll_23, this.state.dice_roll_24, this.state.dice_roll_25];
+    // console.log('dice_array new', this.state.dice_array20);
+    // console.log('dice20_array old', dice20_array)
+    //
+    // // const display_dice_type = (this.state.dice_type) ? (displaySixDie(dice_hash, dice_number_array, this.state.total_dice)) : (display20Die(dice20_array, this.state.total_dice));
+    // console.log('state', this.props);
     // console.log(this.state.total_dice);
-    const display_dice_total = (this.state.dice_type) ? (this.showTotal(dice_number_array)) : (this.showTotal(dice20_array));
+    const display_dice_total = (this.state.dice_type) ? (this.showTotal(dice_number_array)) : (this.showTotal(this.state.dice_array20));
 
     const display_modal = (this.props.is_modal_toggled) ? <SelectDiceModalContainer /> : null;
 
-    const display_type = switchDiceType('dice-6', dice20_array, this.state.total_dice); // dice 6 and dice 20 have diff inputs
+    // const display_type = switchDiceType('dice-6', dice20_array, this.state.total_dice); // dice 6 and dice 20 have diff inputs
     return(
-      <TouchableWithoutFeedback style={{backgroundColor: '#f2f2f2', height: '100%' }}>
+      <View style={{backgroundColor: '#f2f2f2', height: '100%' }}>
       <ImageBackground source={require('../images/playingmat.jpg')} style={{ width: '100%', height: '100%' }}>
 
         {display_modal}
-
         <View style={{flex: 1, flexDirection: 'row', flexWrap: 'wrap'}}>
-          {display_dice_type}
-          {/*
-            {display_type}
-            <FourSided />
-            */}
+          {switchDiceType('dice-6', this.state.dice_array6, this.state.total_dice)}
         </View>
-
+        {/*
+          {switchDiceType('dice-20', this.state.dice_array20, this.state.total_dice)}
+          {display20Die(this.state.dice_array20, this.state.total_dice)}
+          */}
 
         {/* BUTTONS BELOW*/}
         <View style={styles.buttons_container}>
@@ -176,14 +182,14 @@ class FrontPage extends React.Component {
             <View style={styles.button_small}>
               <Button
                 title="Change Dice"
-                // onPress={() => this.props.modalActions.toggleModal()}
+                onPress={() => this.props.modalActions.toggleModal()}
                 buttonStyle={{color: 'red'}}></Button>
             </View>
           </View>
 
         </View>
       </ImageBackground>
-    </TouchableWithoutFeedback >
+    </View >
     );
   }
 }

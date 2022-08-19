@@ -3,14 +3,15 @@ import { View, Text, StyleSheet } from 'react-native';
 import TwentySided from '../dice_displays/20_sided';
 import FourSided from '../dice_displays/four_sided';
 
-export function displaySixDie(die, dice_number_array, total_dice) {
-  const the_dice = dice_number_array.slice(0, total_dice);
+export function displaySixDie(dice_six_array, dice_number_array, total_dice) {
+  // (displaySixDie(dice_hash, dice_number_array, this.state.total_dice))
+  const the_dice = dice_number_array.slice(0, total_dice); // [1, 2, 3]
   // this will map out the total amount of dice depending how mmuch the user has hit the 'add dice button'
   return(
     <View style={styles.dice_container}>
       {the_dice.map((dice, i) =>
         <View style={styles.dice_box} key={i}>
-          {die[dice_number_array[i]].dice}
+          {dice_six_array[dice_number_array[i]]}
         </View>
       )}
 
@@ -19,8 +20,8 @@ export function displaySixDie(die, dice_number_array, total_dice) {
 }
 
 export function display20Die(dice20_array, total_dice) {
+
   const the_dice = dice20_array.slice(0, total_dice);
-  console.log('the dice', the_dice);
   return(
     <View style={styles.dice_container}>
       {the_dice.map((dice, i) =>
