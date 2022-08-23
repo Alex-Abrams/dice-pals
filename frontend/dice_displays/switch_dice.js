@@ -43,25 +43,29 @@ const dice_six_array = [<DiceOne />, <DiceTwo />,  <DiceThree />,  <DiceFour />,
 }
 // this will take the store's dice_array, best course for full access
 // so all i should need is sum total dice and added it to the store
-export function switchDiceTotal(dice_type, dice_array, total_dice) {
+export function switchDiceTotal(dice_array, total_dice, dice_type) {
+  // console.log('thing', dice_array, total_dice, dice_type);
+
   switch(dice_type) {
+
   case ('dice-6'):
-    return sumTotalDice(dice_array, total_dice);
+  // console.log('dicearrarryy', dice_array[0][0]);
+    return sumTotalDice(dice_array[0], total_dice);
 
-  case ('dice-4'):
-    return sumTotalDice(dice_array, total_dice);
-
-  case ('dice-8'):
-    return sumTotalDice(dice_array, total_dice);
-
-  case ('dice-10'):
-    return sumTotalDice(dice_array, total_dice);
-
-  case ('dice-12'):
-    return sumTotalDice(dice_array, total_dice);
+  // case ('dice-4'):
+  //   return sumTotalDice(dice_array, total_dice);
+  //
+  // case ('dice-8'):
+  //   return sumTotalDice(dice_array, total_dice);
+  //
+  // case ('dice-10'):
+  //   return sumTotalDice(dice_array, total_dice);
+  //
+  // case ('dice-12'):
+  //   return sumTotalDice(dice_array, total_dice);
 
   case ('dice-20'):
-    return sumTotalDice(dice_array, total_dice);
+    return sumTotalDice(dice_array[1], total_dice);
   default:
     return null;
 };

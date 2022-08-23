@@ -12,7 +12,7 @@ import { switchDiceType, switchDiceTotal } from '../dice_displays/switch_dice';
 //////
 import {rollDiceArray } from '../dice_displays/roll_functions';
 
-import { displaySixDie, display20Die, sumDice }from './dice_functions';
+import { displaySixDie, display20Die }from './dice_functions';
 
 class FrontPage extends React.Component {
   constructor(props) {
@@ -33,9 +33,9 @@ class FrontPage extends React.Component {
       dice_roll_24: 12,
       dice_roll_25: 19,
       total_dice: 2, // always start at 2 dice, lowest will be 1
-      show_total: false,
+      show_total: true,
       dice_type: false, // change around later for didferent dice types, also see 'sumDice'
-      dice_array6: [3, 2, 2, 6, 4, 1],
+      dice_array6: [3, 4, 2, 6, 4, 1],
       dice_array20: [8, 11, 19, 4, 7, 16],
       // type_of_dice: '6-sided',
     };
@@ -78,9 +78,9 @@ class FrontPage extends React.Component {
       counter += 1;
       if (counter === 2) {
         clearInterval(oneSecInterval);
-        this.setState({show_total: true}); // once counter hits 20 show the total
+        // this.setState({show_total: true}); // once counter hits 20 show the total
       };
-    }, 50); // set interval timing here
+    }, 100); // set interval timing here
   }
 
 
@@ -92,12 +92,11 @@ class FrontPage extends React.Component {
     } else {
       console.log('Out of dice range');
     }
-
   }
 
   showTotal(dice_number_array) { // SEE HERE FOR TOTAL
     const display_total = (this.state.show_total) ? (
-      <Text style={styles.total_text}>Total: {sumDice(dice_number_array, this.state.total_dice, this.state.dice_type)}</Text>
+      <Text style={styles.total_text}>Total: {switchDiceTotal(dice_number_array, this.state.total_dice, this.props.dice_selection)}</Text>
       ) : (
         null
     );
@@ -109,13 +108,18 @@ class FrontPage extends React.Component {
     );
   }
 
-  changeDiceType() {
+  changeDiceType() { // not gunna need this soon
     this.setState({dice_type: !this.state.dice_type});
+  }
+
+  createTotalsArray() {
+    const total_array = [this.state.dice_array6, this.state.dice_array10];
+    return total_array;
   }
 
 
   render() {
-    console.log(this.props);
+    // console.log(this.props);
     let dice_number_1 = this.state.dice_roll_1;
     let dice_number_2 = this.state.dice_roll_2;
     let dice_number_3 = this.state.dice_roll_3;
@@ -134,8 +138,9 @@ class FrontPage extends React.Component {
     // // const display_dice_type = (this.state.dice_type) ? (displaySixDie(dice_hash, dice_number_array, this.state.total_dice)) : (display20Die(dice20_array, this.state.total_dice));
     // console.log('state', this.props);
     // console.log(this.state.total_dice);
-    const display_dice_total = (this.state.dice_type) ? (this.showTotal(dice_number_array)) : (this.showTotal(this.state.dice_array20));
+    // const display_dice_total = (this.state.dice_type) ? (this.showTotal(dice_number_array)) : (this.showTotal(this.state.dice_array20));
 
+    const display_dice_total = this.showTotal(this.createTotalsArray());
     const display_modal = (this.props.is_modal_toggled) ? <SelectDiceModalContainer /> : null;
 
     // const display_type = switchDiceType('dice-6', dice20_array, this.state.total_dice); // dice 6 and dice 20 have diff inputs

@@ -5,13 +5,14 @@ import FourSided from '../dice_displays/four_sided';
 
 export function displaySixDie(dice_six_array, dice_number_array, total_dice) {
   // (displaySixDie(dice_hash, dice_number_array, this.state.total_dice))
-  const the_dice = dice_number_array.slice(0, total_dice); // [1, 2, 3]
+  const the_dice = dice_number_array.slice(0, total_dice); // [1, 6]
+  console.log('the diceugh', the_dice);
   // this will map out the total amount of dice depending how mmuch the user has hit the 'add dice button'
   return(
     <View style={styles.dice_container}>
       {the_dice.map((dice, i) =>
         <View style={styles.dice_box} key={i}>
-          {dice_six_array[dice_number_array[i]]}
+          {dice_six_array[dice_number_array[i] - 1]}
         </View>
       )}
 
@@ -48,13 +49,13 @@ export function display4Die(dice4_array, total_dice) {
 }
 
 export function sumDice(dice_array, total_dice, dice_type) {
-  const chosen_dice = dice_array.slice(0, total_dice);
-  let result = chosen_dice.reduce((partialSum, a) => partialSum + a, 0); // total of dice
-  if (dice_type) {
-    return result + (total_dice); // the Math.random will not let me at the 1s to the dice anywhere else
-  } else {
-    return result;
-  };
+  // const chosen_dice = dice_array.slice(0, total_dice);
+  // let result = chosen_dice.reduce((partialSum, a) => partialSum + a, 0); // total of dice
+  // if (dice_type) {
+  //   return result + (total_dice); // the Math.random will not let me at the 1s to the dice anywhere else
+  // } else {
+  //   return result;
+  // };
 }
 
 const styles = StyleSheet.create({
