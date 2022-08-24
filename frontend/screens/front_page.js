@@ -25,7 +25,7 @@ class FrontPage extends React.Component {
       dice_array4: [2, 1, 3, 4, 2, 1],
       dice_array8: [8, 4, 2, 1, 2, 6],
       dice_array12: [12, 4, 8, 1, 11, 3],
-      // type_of_dice: '6-sided',
+      dice_array10: [10, 6, 9, 1, 4, 7],
     };
 
   }
@@ -41,6 +41,7 @@ class FrontPage extends React.Component {
       this.setState({ dice_array20: rollDiceArray(20) });
       this.setState({ dice_array4: rollDiceArray(4) });
       this.setState({ dice_array12: rollDiceArray(12) });
+      this.setState({ dice_array10: rollDiceArray(10) });
       counter += 1;
       if (counter === 2) {
         clearInterval(oneSecInterval);
@@ -76,7 +77,7 @@ class FrontPage extends React.Component {
 
 
   createTotalsArray() {
-    const total_array = [this.state.dice_array6, this.state.dice_array20, this.state.dice_array4, this.state.dice_array8, this.state.dice_array12];
+    const total_array = [this.state.dice_array6, this.state.dice_array20, this.state.dice_array4, this.state.dice_array8, this.state.dice_array12, this.state.dice_array10];
     return total_array;
   }
 
