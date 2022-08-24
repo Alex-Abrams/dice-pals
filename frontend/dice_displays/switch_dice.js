@@ -1,12 +1,10 @@
-import TwentySided from '../dice_displays/20_sided';
-import FourSided from '../dice_displays/four_sided';
 import DiceSix from '../screens/dice_six';
 import DiceFive from '../screens/dice_five';
 import DiceFour from '../screens/dice_four';
 import DiceThree from '../screens/dice_three';
 import DiceTwo from '../screens/dice_two';
 import DiceOne from '../screens/dice_one';
-import { display20Die, displaySixDie, display4Die } from '../screens/dice_functions';
+import { display20Die, displaySixDie, display4Die, display8Die } from '../screens/dice_functions';
 import { rollDiceArray, sumTotalDice } from './roll_functions';
 
 import React, { Component } from 'react';
@@ -27,6 +25,7 @@ const dice_six_array = [<DiceOne />, <DiceTwo />,  <DiceThree />,  <DiceFour />,
     return display4Die(dice_number_array[2], total_dice);
 
   case ('dice-8'):
+  return display8Die(dice_number_array[3], total_dice);
     return;
 
   case ('dice-10'):
@@ -55,8 +54,8 @@ export function switchDiceTotal(dice_array, total_dice, dice_type) {
   case ('dice-4'):
     return sumTotalDice(dice_array[2], total_dice);
   //
-  // case ('dice-8'):
-  //   return sumTotalDice(dice_array, total_dice);
+  case ('dice-8'):
+    return sumTotalDice(dice_array[3], total_dice);
   //
   // case ('dice-10'):
   //   return sumTotalDice(dice_array, total_dice);

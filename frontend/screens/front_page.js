@@ -20,10 +20,10 @@ class FrontPage extends React.Component {
     this.state = {
       total_dice: 2, // always start at 2 dice, lowest will be 1
       show_total: false,
-      dice_type: false, // change around later for didferent dice types, also see 'sumDice'
       dice_array6: [3, 4, 2, 6, 4, 1],
       dice_array20: [8, 11, 19, 4, 7, 16],
       dice_array4: [2, 1, 3, 4, 2, 1],
+      dice_array8: [8, 4, 2, 1, 2, 6],
       // type_of_dice: '6-sided',
     };
 
@@ -38,7 +38,7 @@ class FrontPage extends React.Component {
     let oneSecInterval = setInterval(() => {
       this.setState({ dice_array6: rollDiceArray(6) });
       this.setState({ dice_array20: rollDiceArray(20) });
-      // this.setState({ dice_array4: rollDiceArray(40) });
+      this.setState({ dice_array4: rollDiceArray(4) });
       counter += 1;
       if (counter === 2) {
         clearInterval(oneSecInterval);
@@ -72,12 +72,9 @@ class FrontPage extends React.Component {
     );
   }
 
-  changeDiceType() { // not gunna need this soon
-    this.setState({dice_type: !this.state.dice_type});
-  }
 
   createTotalsArray() {
-    const total_array = [this.state.dice_array6, this.state.dice_array20, this.state.dice_array4];
+    const total_array = [this.state.dice_array6, this.state.dice_array20, this.state.dice_array4, this.state.dice_array8];
     return total_array;
   }
 

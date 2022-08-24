@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import TwentySided from '../dice_displays/20_sided';
 import FourSided from '../dice_displays/four_sided';
+import EightSided from '../dice_displays/eight_sided';
 
 export function displaySixDie(dice_six_array, dice_number_array, total_dice) {
   const the_dice = dice_number_array.slice(0, total_dice); // [1, 6]
@@ -38,6 +39,19 @@ export function display4Die(dice4_array, total_dice) {
       {the_dice.map((dice, i) =>
         <View key={i}>
           <FourSided roll={dice4_array[i]} />
+        </View>
+      )}
+    </View>
+  );
+}
+
+export function display8Die(dice8_array, total_dice) {
+  const the_dice = dice8_array.slice(0, total_dice);
+  return(
+    <View style={styles.dice_container}>
+      {the_dice.map((dice, i) =>
+        <View key={i}>
+          <EightSided roll={dice8_array[i]} />
         </View>
       )}
     </View>
