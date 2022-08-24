@@ -21,10 +21,10 @@ const dice_six_array = [<DiceOne />, <DiceTwo />,  <DiceThree />,  <DiceFour />,
 
   switch(dice_type) {
   case ('dice-6'):
-    return displaySixDie(dice_six_array, dice_number_array, total_dice);
+    return displaySixDie(dice_six_array, dice_number_array[0], total_dice);
 
   case ('dice-4'):
-    return <FourSided />;
+    return display4Die(dice_number_array[2], total_dice);
 
   case ('dice-8'):
     return;
@@ -36,7 +36,7 @@ const dice_six_array = [<DiceOne />, <DiceTwo />,  <DiceThree />,  <DiceFour />,
     return;
 
   case ('dice-20'):
-    return display20Die(dice_number_array, total_dice);
+    return display20Die(dice_number_array[1], total_dice);
   default:
     return null;
 };
@@ -52,8 +52,8 @@ export function switchDiceTotal(dice_array, total_dice, dice_type) {
   // console.log('dicearrarryy', dice_array[0][0]);
     return sumTotalDice(dice_array[0], total_dice);
 
-  // case ('dice-4'):
-  //   return sumTotalDice(dice_array, total_dice);
+  case ('dice-4'):
+    return sumTotalDice(dice_array[2], total_dice);
   //
   // case ('dice-8'):
   //   return sumTotalDice(dice_array, total_dice);
@@ -72,4 +72,3 @@ export function switchDiceTotal(dice_array, total_dice, dice_type) {
 }
 
 // displaySixDie(dice_hash, dice_number_array, this.state.total_dice)
-// display20Die(dice20_array, this.state.total_dice

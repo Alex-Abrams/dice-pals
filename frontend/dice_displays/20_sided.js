@@ -5,7 +5,7 @@ class TwentySided extends React.Component {
   constructor(props) {
     super(props);
 
-    
+
   }
 
 
@@ -15,7 +15,7 @@ class TwentySided extends React.Component {
     const { roll } = this.props;
 
     return(
-      <View style={{ alignItems: 'center'}}>
+      <View style={{ alignItems: 'center' }}>
         <Image source={require('../images/cropped_20_sided.png')} style={{ height: 120, width: 120}} />
         <Text style={styles.single_number}>{roll}</Text>
       </View>
@@ -26,12 +26,11 @@ class TwentySided extends React.Component {
 const styles = StyleSheet.create({
   single_number: {
     position: 'absolute',
-    zIndex: 100,
+    zIndex: 3,
     marginTop: 40,
     fontSize: 24,
     fontWeight: 'bold',
     color: 'black',
-
   },
 })
 

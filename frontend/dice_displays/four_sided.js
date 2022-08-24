@@ -13,9 +13,9 @@ class FourSided extends React.Component {
     const { roll } = this.props;
 
     return(
-      <View style={{ alignItems: 'center'}}>
-        <Image source={require('../images/4_sided_die.png')} style={{ height: 145, width: 145}} />
-        <Text style={styles.single_number}>4</Text>
+      <View style={{ alignItems: 'center' }}>
+        <Image source={require('../images/4_sided_die.png')} style={{ height: 125, width: 125}} />
+        <Text style={styles.single_number}>{roll}</Text>
       </View>
     );
   }
@@ -24,9 +24,9 @@ class FourSided extends React.Component {
 const styles = StyleSheet.create({
   single_number: {
     position: 'absolute',
-    zIndex: 100,
+    zIndex: 3,
     marginTop: 40,
-    fontSize: 28,
+    fontSize: 24,
     fontWeight: 'bold',
     color: 'black',
     paddingTop: 20,

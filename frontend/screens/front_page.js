@@ -12,48 +12,23 @@ import { switchDiceType, switchDiceTotal } from '../dice_displays/switch_dice';
 //////
 import {rollDiceArray } from '../dice_displays/roll_functions';
 
-import { displaySixDie, display20Die }from './dice_functions';
 
 class FrontPage extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      // count: 0,
-      dice_roll_1: 1,
-      dice_roll_2: 1,
-      dice_roll_3: 1,
-      dice_roll_4: 1,
-      dice_roll_5: 1,
-      dice_roll_6: 1,
-      dice_roll_20: 1,
-      dice_roll_21: 5,
-      dice_roll_22: 16,
-      dice_roll_23: 7,
-      dice_roll_24: 12,
-      dice_roll_25: 19,
       total_dice: 2, // always start at 2 dice, lowest will be 1
-      show_total: true,
+      show_total: false,
       dice_type: false, // change around later for didferent dice types, also see 'sumDice'
       dice_array6: [3, 4, 2, 6, 4, 1],
       dice_array20: [8, 11, 19, 4, 7, 16],
+      dice_array4: [2, 1, 3, 4, 2, 1],
       // type_of_dice: '6-sided',
     };
 
   }
 
-
-  rollDice(max) {
-    return Math.floor(Math.random() * max); // roll a number between 1-6 randomly
-
-  }
-
-  componentDidMount() { // have the dice randomly rolled when the screen is loaded.
-    this.setState({ dice_roll_1: this.rollDice(6)});
-    this.setState({ dice_roll_2: this.rollDice(6)});
-    this.setState({ dice_roll_3: this.rollDice(6)});
-    // this.props.modalActions.receiveDiceRolls
-  }
 
   runDiceAnimation() {
     // this will use timer intervals to change the dice from 1-6 randomly
@@ -61,24 +36,13 @@ class FrontPage extends React.Component {
     this.setState({show_total: false}); // dont show total while rolling die
     let counter = 0;
     let oneSecInterval = setInterval(() => {
-      this.setState({ dice_roll_1: this.rollDice(6)});
-      this.setState({ dice_roll_2: this.rollDice(6)});
-      this.setState({ dice_roll_3: this.rollDice(6)});
-      this.setState({ dice_roll_4: this.rollDice(6)});
-      this.setState({ dice_roll_5: this.rollDice(6)});
-      this.setState({ dice_roll_6: this.rollDice(6)});
-      this.setState({ dice_roll_20: this.rollDice(20) + 1 });
-      this.setState({ dice_roll_21: this.rollDice(20) + 1 });
-      this.setState({ dice_roll_22: this.rollDice(20) + 1 });
-      this.setState({ dice_roll_23: this.rollDice(20) + 1 });
-      this.setState({ dice_roll_24: this.rollDice(20) + 1 });
-      this.setState({ dice_roll_25: this.rollDice(20) + 1 });
-      this.setState({ dice_array6: rollDiceArray(6)});
-      this.setState({ dice_array20: rollDiceArray(20)});
+      this.setState({ dice_array6: rollDiceArray(6) });
+      this.setState({ dice_array20: rollDiceArray(20) });
+      // this.setState({ dice_array4: rollDiceArray(40) });
       counter += 1;
       if (counter === 2) {
         clearInterval(oneSecInterval);
-        // this.setState({show_total: true}); // once counter hits 20 show the total
+        this.setState({show_total: true}); // once counter hits 20 show the total
       };
     }, 100); // set interval timing here
   }
@@ -113,54 +77,28 @@ class FrontPage extends React.Component {
   }
 
   createTotalsArray() {
-    const total_array = [this.state.dice_array6, this.state.dice_array10];
+    const total_array = [this.state.dice_array6, this.state.dice_array20, this.state.dice_array4];
     return total_array;
   }
 
 
   render() {
-    // console.log(this.props);
-    let dice_number_1 = this.state.dice_roll_1;
-    let dice_number_2 = this.state.dice_roll_2;
-    let dice_number_3 = this.state.dice_roll_3;
-    let dice_number_4 = this.state.dice_roll_4;
-    let dice_number_5 = this.state.dice_roll_5;
-    let dice_number_6 = this.state.dice_roll_6;
-    const dice_number_array = [dice_number_1, dice_number_2, dice_number_3, dice_number_4, dice_number_5, dice_number_6];
-
-    // const dice_hash = [{'dice_comp': <DiceOne />, 'num': 1 }, {'dice_comp': <DiceTwo />, 'num': 2 }, {'dice_comp':  <DiceThree />, 'num': 3 }, {'dice_comp': <DiceFour />, 'num': 4 },
-    //   {'poo': <DiceFive />, 'num': 5 }, {'dice_comp': <DiceSix />, 'num': 6 }];
-
-    // const dice20_array = [this.state.dice_roll_20, this.state.dice_roll_21, this.state.dice_roll_22 ,this.state.dice_roll_23, this.state.dice_roll_24, this.state.dice_roll_25];
-    // console.log('dice_array new', this.state.dice_array20);
-    // console.log('dice20_array old', dice20_array)
-    //
-    // // const display_dice_type = (this.state.dice_type) ? (displaySixDie(dice_hash, dice_number_array, this.state.total_dice)) : (display20Die(dice20_array, this.state.total_dice));
-    // console.log('state', this.props);
-    // console.log(this.state.total_dice);
-    // const display_dice_total = (this.state.dice_type) ? (this.showTotal(dice_number_array)) : (this.showTotal(this.state.dice_array20));
-
     const display_dice_total = this.showTotal(this.createTotalsArray());
     const display_modal = (this.props.is_modal_toggled) ? <SelectDiceModalContainer /> : null;
 
-    // const display_type = switchDiceType('dice-6', dice20_array, this.state.total_dice); // dice 6 and dice 20 have diff inputs
     return(
       <View style={{backgroundColor: '#f2f2f2', height: '100%' }}>
       <ImageBackground source={require('../images/playingmat.jpg')} style={{ width: '100%', height: '100%' }}>
 
         {display_modal}
         <View style={{flex: 1, flexDirection: 'row', flexWrap: 'wrap'}}>
-          {switchDiceType('dice-6', this.state.dice_array6, this.state.total_dice)}
+          {switchDiceType(this.props.dice_selection, this.createTotalsArray(), this.state.total_dice)}
         </View>
-        {/*
-          {switchDiceType('dice-20', this.state.dice_array20, this.state.total_dice)}
-          {display20Die(this.state.dice_array20, this.state.total_dice)}
-          */}
 
         {/* BUTTONS BELOW*/}
         <View style={styles.buttons_container}>
 
-        <View style={{alignSelf: 'center', paddingBottom: 19}}>
+        <View style={{alignSelf: 'center', paddingBottom: 4}}>
         {display_dice_total}
         </View>
         <View style={styles.button_view}>
@@ -207,8 +145,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     flexWrap: 'wrap',
     paddingTop: 20,
-    // alignSelf: 'center'
-    // paddingTop: 100,
   },
   dice_box: {
     backgroundColor: '#ffffff',
@@ -220,10 +156,11 @@ const styles = StyleSheet.create({
   },
   buttons_container: {
     position: 'absolute',
-    bottom: 40,
+    bottom: 3,
     width: '100%',
     paddingLeft: 10,
     paddingRight: 10,
+    // paddingTop: 20,
   },
   button_view: {
     paddingBottom: 10,

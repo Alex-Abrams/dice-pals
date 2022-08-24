@@ -4,9 +4,7 @@ import TwentySided from '../dice_displays/20_sided';
 import FourSided from '../dice_displays/four_sided';
 
 export function displaySixDie(dice_six_array, dice_number_array, total_dice) {
-  // (displaySixDie(dice_hash, dice_number_array, this.state.total_dice))
   const the_dice = dice_number_array.slice(0, total_dice); // [1, 6]
-  console.log('the diceugh', the_dice);
   // this will map out the total amount of dice depending how mmuch the user has hit the 'add dice button'
   return(
     <View style={styles.dice_container}>
@@ -21,7 +19,6 @@ export function displaySixDie(dice_six_array, dice_number_array, total_dice) {
 }
 
 export function display20Die(dice20_array, total_dice) {
-
   const the_dice = dice20_array.slice(0, total_dice);
   return(
     <View style={styles.dice_container}>
@@ -35,8 +32,7 @@ export function display20Die(dice20_array, total_dice) {
 }
 
 export function display4Die(dice4_array, total_dice) {
-  const the_dice = dice20_array.slice(0, total_dice);
-
+  const the_dice = dice4_array.slice(0, total_dice);
   return(
     <View style={styles.dice_container}>
       {the_dice.map((dice, i) =>
@@ -48,15 +44,6 @@ export function display4Die(dice4_array, total_dice) {
   );
 }
 
-export function sumDice(dice_array, total_dice, dice_type) {
-  // const chosen_dice = dice_array.slice(0, total_dice);
-  // let result = chosen_dice.reduce((partialSum, a) => partialSum + a, 0); // total of dice
-  // if (dice_type) {
-  //   return result + (total_dice); // the Math.random will not let me at the 1s to the dice anywhere else
-  // } else {
-  //   return result;
-  // };
-}
 
 const styles = StyleSheet.create({
   dice_container: {
@@ -65,8 +52,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     flexWrap: 'wrap',
     paddingTop: 20,
-    // alignSelf: 'center'
-    // paddingTop: 100,
   },
   dice_box: {
     backgroundColor: '#ffffff',
