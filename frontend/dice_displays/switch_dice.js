@@ -4,7 +4,7 @@ import DiceFour from '../screens/dice_four';
 import DiceThree from '../screens/dice_three';
 import DiceTwo from '../screens/dice_two';
 import DiceOne from '../screens/dice_one';
-import { display20Die, displaySixDie, display4Die, display8Die } from '../screens/dice_functions';
+import { display20Die, displaySixDie, display4Die, display8Die, display12Die } from '../screens/dice_functions';
 import { rollDiceArray, sumTotalDice } from './roll_functions';
 
 import React, { Component } from 'react';
@@ -25,14 +25,13 @@ const dice_six_array = [<DiceOne />, <DiceTwo />,  <DiceThree />,  <DiceFour />,
     return display4Die(dice_number_array[2], total_dice);
 
   case ('dice-8'):
-  return display8Die(dice_number_array[3], total_dice);
-    return;
+    return display8Die(dice_number_array[3], total_dice);
 
   case ('dice-10'):
     return;
 
   case ('dice-12'):
-    return;
+    return display12Die(dice_number_array[4], total_dice);
 
   case ('dice-20'):
     return display20Die(dice_number_array[1], total_dice);

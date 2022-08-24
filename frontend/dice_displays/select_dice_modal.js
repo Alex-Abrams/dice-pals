@@ -7,33 +7,38 @@ class SelectDiceModal extends React.Component {
     super(props);
   }
 
+  diceSelector(dice_type) {
+    this.props.modalActions.receiveDiceSelection(dice_type);
+
+    this.props.modalActions.toggleModal();
+  }
 
   render() {
     return(
       <View style={styles.modal_container}>
 
         <View style={styles.modal_content}>
-         <Pressable style={styles.pressables} onPress={() => this.props.modal_actions.receiveDiceSelection('dice-6')}>
+         <Pressable style={styles.pressables} onPress={() => this.diceSelector('dice-6')}>
            <Text style={styles.text}>6 - Sided</Text>
          </Pressable>
 
-         <Pressable style={styles.pressables} onPress={() => this.props.modal_actions.receiveDiceSelection('dice-4')}>
+         <Pressable style={styles.pressables} onPress={() => this.diceSelector('dice-4')}>
            <Text style={styles.text}>4 - Sided</Text>
          </Pressable>
 
-         <Pressable style={styles.pressables} onPress={() => this.props.modal_actions.receiveDiceSelection('dice-8')}>
+         <Pressable style={styles.pressables} onPress={() => this.diceSelector('dice-8')}>
            <Text style={styles.text}>8 - Sided</Text>
          </Pressable>
 
-         <Pressable style={styles.pressables} onPress={() => this.props.modal_actions.receiveDiceSelection('dice-10')}>
+         <Pressable style={styles.pressables} onPress={() => this.diceSelector('dice-10')}>
            <Text style={styles.text}>10 - Sided</Text>
          </Pressable>
 
-         <Pressable style={styles.pressables} onPress={() => this.props.modal_actions.receiveDiceSelection('dice-12')}>
+         <Pressable style={styles.pressables} onPress={() => this.diceSelector('dice-12')}>
            <Text style={styles.text}>12 - Sided</Text>
          </Pressable>
 
-         <Pressable style={styles.pressables} onPress={() => this.props.modal_actions.receiveDiceSelection('dice-20')}>
+         <Pressable style={styles.pressables} onPress={() => this.diceSelector('dice-20')}>
            <Text style={styles.text}>20 - Sided</Text>
          </Pressable>
        </View>

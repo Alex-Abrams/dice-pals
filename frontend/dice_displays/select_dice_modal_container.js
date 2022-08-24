@@ -4,7 +4,7 @@ import SelectDiceModal from './select_dice_modal';
 import * as modalActions from '../actions/modal_actions';
 
 const mapDispatchToProps = dispatch => ({
-  modal_actions: bindActionCreators(modalActions, dispatch),
+  modalActions: bindActionCreators(modalActions, dispatch),
 });
 
 

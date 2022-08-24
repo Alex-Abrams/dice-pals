@@ -25,11 +25,11 @@ const styles = StyleSheet.create({
   single_number: {
     position: 'absolute',
     zIndex: 3,
-    marginTop: 40,
+    marginTop: 55,
     fontSize: 24,
     fontWeight: 'bold',
     color: 'black',
-    paddingTop: 20,
+    // paddingTop: 20,
     paddingRight: 3,
   },
 })

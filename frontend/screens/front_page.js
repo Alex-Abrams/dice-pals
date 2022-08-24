@@ -24,6 +24,7 @@ class FrontPage extends React.Component {
       dice_array20: [8, 11, 19, 4, 7, 16],
       dice_array4: [2, 1, 3, 4, 2, 1],
       dice_array8: [8, 4, 2, 1, 2, 6],
+      dice_array12: [12, 4, 8, 1, 11, 3],
       // type_of_dice: '6-sided',
     };
 
@@ -39,6 +40,7 @@ class FrontPage extends React.Component {
       this.setState({ dice_array6: rollDiceArray(6) });
       this.setState({ dice_array20: rollDiceArray(20) });
       this.setState({ dice_array4: rollDiceArray(4) });
+      this.setState({ dice_array12: rollDiceArray(12) });
       counter += 1;
       if (counter === 2) {
         clearInterval(oneSecInterval);
@@ -74,8 +76,14 @@ class FrontPage extends React.Component {
 
 
   createTotalsArray() {
-    const total_array = [this.state.dice_array6, this.state.dice_array20, this.state.dice_array4, this.state.dice_array8];
+    const total_array = [this.state.dice_array6, this.state.dice_array20, this.state.dice_array4, this.state.dice_array8, this.state.dice_array12];
     return total_array;
+  }
+
+  clickBehindModal() { // only allow the touchable with feedback if the modal is already open, otherwise do nothing
+    if (this.props.is_modal_toggled) { // if toggled is true, then clicking  behind modal will close it
+      this.props.modalActions.toggleModal();
+    };
   }
 
 
@@ -84,7 +92,7 @@ class FrontPage extends React.Component {
     const display_modal = (this.props.is_modal_toggled) ? <SelectDiceModalContainer /> : null;
 
     return(
-      <View style={{backgroundColor: '#f2f2f2', height: '100%' }}>
+      <TouchableWithoutFeedback onPress={() => this.clickBehindModal()} style={{backgroundColor: '#f2f2f2', height: '100%' }}>
       <ImageBackground source={require('../images/playingmat.jpg')} style={{ width: '100%', height: '100%' }}>
 
         {display_modal}
@@ -130,7 +138,7 @@ class FrontPage extends React.Component {
 
         </View>
       </ImageBackground>
-    </View >
+    </TouchableWithoutFeedback>
     );
   }
 }

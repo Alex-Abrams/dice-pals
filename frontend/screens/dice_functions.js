@@ -3,6 +3,7 @@ import { View, Text, StyleSheet } from 'react-native';
 import TwentySided from '../dice_displays/20_sided';
 import FourSided from '../dice_displays/four_sided';
 import EightSided from '../dice_displays/eight_sided';
+import TwelveSided from '../dice_displays/12_sided';
 
 export function displaySixDie(dice_six_array, dice_number_array, total_dice) {
   const the_dice = dice_number_array.slice(0, total_dice); // [1, 6]
@@ -52,6 +53,19 @@ export function display8Die(dice8_array, total_dice) {
       {the_dice.map((dice, i) =>
         <View key={i}>
           <EightSided roll={dice8_array[i]} />
+        </View>
+      )}
+    </View>
+  );
+}
+
+export function display12Die(dice12_array, total_dice) {
+  const the_dice = dice12_array.slice(0, total_dice);
+  return(
+    <View style={styles.dice_container}>
+      {the_dice.map((dice, i) =>
+        <View key={i}>
+          <TwelveSided roll={dice12_array[i]} />
         </View>
       )}
     </View>

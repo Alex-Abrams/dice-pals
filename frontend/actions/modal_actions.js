@@ -18,7 +18,7 @@ export const receiveDiceRolls = (rolls) => ({
   rolls,
 });
 //
-// DONT NEED DELETE LATER 
+// DONT NEED, DELETE LATER 
 // export const receiveDiceArray = (dice_array) => ({
 //   type: RECEIVE_DICE_ROLLS,
 //   dice_array,
