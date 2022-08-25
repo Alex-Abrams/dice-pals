@@ -25,7 +25,7 @@ class FrontPage extends React.Component {
       dice_array4: [2, 1, 3, 4, 2, 1],
       dice_array8: [8, 4, 2, 1, 2, 6],
       dice_array12: [12, 4, 8, 1, 11, 3],
-      dice_array10: [10, 6, 9, 1, 4, 7],
+      dice_array10: [5, 6, 9, 1, 4, 7],
     };
 
   }
@@ -42,6 +42,7 @@ class FrontPage extends React.Component {
       this.setState({ dice_array4: rollDiceArray(4) });
       this.setState({ dice_array12: rollDiceArray(12) });
       this.setState({ dice_array10: rollDiceArray(10) });
+      this.setState({ dice_array8: rollDiceArray(8) });
       counter += 1;
       if (counter === 2) {
         clearInterval(oneSecInterval);

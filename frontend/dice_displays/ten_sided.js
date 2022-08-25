@@ -28,6 +28,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     zIndex: 3,
     marginTop: 30,
+    right: 55,
     fontSize: 24,
     fontWeight: 'bold',
     color: 'black',
